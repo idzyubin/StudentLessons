@@ -168,3 +168,11 @@ var adultUsers = context.Users.Where(user => 18 <= user.Age && user.Age <= 26).T
    
     app.Run();
     ```
+   
+Ссылки и материалы:
+- Metanit. Руководство по C# и .NET 7 https://metanit.com/sharp/tutorial/
+- Metanit. Руководство по ASP.NET Core 7 https://metanit.com/sharp/aspnet6/
+- Metanit. Руководство по C# и EF Core 7 https://metanit.com/sharp/efcore/
+- Mark J. Price. C# 11 and .NET 7 – Modern Cross-Platform Development Fundamentals
+- Andrew Lock. ASP.NET Core in Action
+- John P. Smith. Entity Framework Core in Action
