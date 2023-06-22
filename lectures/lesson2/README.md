@@ -86,10 +86,8 @@ graph
 2. Найти элемент `<ItemGroup>...</ItemGroup>`, который содержит в себе ссылки на пакеты: `<PackageReference ... />`
 3. Добавить следующие строки в данную группу, чтобы получилось вот так
     ```diff
-    <ItemGroup>
-        +<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
-        +<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    </ItemGroup>
+    +<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+    +<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     ```
 4. После сохранения вашего проекта, IDE обновит зависимости и вы сможете получить доступ к Swagger.
 5. После этого, в файле `Program.cs` рекомендуется добавить следующие строки
