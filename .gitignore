@@ -1,0 +1,7 @@
+backend/UserService/.idea
+backend/UserService/src/UserService.Host/bin
+backend/UserService/src/UserService.Host/obj
+backend/UserService/src/UserService.Domain/bin
+backend/UserService/src/UserService.Domain/obj
+backend/UserService/src/UserService.Infrastructure/bin
+backend/UserService/src/UserService.Infrastructure/obj
