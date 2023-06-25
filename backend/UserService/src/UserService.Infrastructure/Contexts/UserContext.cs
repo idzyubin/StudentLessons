@@ -6,7 +6,7 @@ namespace UserService.Infrastructure.Contexts;
 /// <summary>
 ///     Контекст для работы с пользователями
 /// </summary>
-public class UserContext : DbContext
+public sealed class UserContext : DbContext
 {
     /// <summary>
     ///     Пользователи
@@ -15,5 +15,6 @@ public class UserContext : DbContext
 
     public UserContext(DbContextOptions options) : base(options)
     {
+        Database.Migrate();
     }
 }
