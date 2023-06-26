@@ -6,3 +6,11 @@ backend/UserService/src/UserService.Domain/bin
 backend/UserService/src/UserService.Domain/obj
 backend/UserService/src/UserService.Infrastructure/bin
 backend/UserService/src/UserService.Infrastructure/obj
+backend/NotificationService/src/NotificationService.Host/bin
+backend/NotificationService/src/NotificationService.Host/obj
+backend/NotificationService/src/NotificationService.Domain/bin
+backend/NotificationService/src/NotificationService.Domain/obj
+backend/NotificationService/src/NotificationService.Infrastructure/bin
+backend/NotificationService/src/NotificationService.Infrastructure/obj
+backend/NotificationService/src/NotificationService.Worker/bin
+backend/NotificationService/src/NotificationService.Worker/obj
