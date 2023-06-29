@@ -9,10 +9,16 @@
 
     <ItemGroup>
         <PackageReference Include="Confluent.Kafka" Version="2.1.1" />
+        <PackageReference Include="Confluent.SchemaRegistry.Serdes.Protobuf" Version="2.1.1" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.54.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\NotificationService.Infrastructure\NotificationService.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NotificationService.Infrastructure\NotificationService.Infrastructure.csproj" />
+        <Protobuf Include="Protos\notification.proto" />
     </ItemGroup>
 </Project>

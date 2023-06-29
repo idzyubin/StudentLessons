@@ -1,13 +1,19 @@
-using System.Text.Json;
 using Confluent.Kafka;
-using NotificationService.Domain.Contracts;
-using NotificationService.Domain.Entities;
+using Confluent.SchemaRegistry;
+using Confluent.SchemaRegistry.Serdes;
+using Contracts.Proto.Notification;
+using Microsoft.Extensions.Options;
+using NotificationService.Infrastructure.Constants;
 using NotificationService.Infrastructure.Extensions;
 using NotificationService.Infrastructure.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddBusinessLogic();
+
+builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection("Kafka"));
+builder.Services.Configure<SchemaRegistryConfig>(builder.Configuration.GetSection("SchemaRegistryConfig"));
+
 builder.Services.Configure<NotificationServiceOptions>(
     builder.Configuration.GetSection(NotificationServiceOptions.Section));
 
@@ -17,11 +23,17 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.MapGet("/api/notification/send", async (ILogger<Program> logger, CancellationToken cancellationToken) =>
+app.MapGet("/api/notification/send", async (
+    ILogger<Program> logger, 
+    IOptions<ProducerConfig> producerConfig, 
+    IOptions<SchemaRegistryConfig> schemaRegistryConfig, 
+    CancellationToken cancellationToken) =>
 {
-    var config = new ProducerConfig { BootstrapServers = builder.Configuration.GetConnectionString("Kafka") };
-    using var producer = new ProducerBuilder<Null, string>(config).Build();
-    const string notificationTopicName = "notification-group";
+    using var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig.Value);
+    using var producer = new ProducerBuilder<string, Notification>(producerConfig.Value)
+        .SetValueSerializer(new ProtobufSerializer<Notification>(schemaRegistry))
+        .Build();
+    
     try
     {
         var notification = new Notification
@@ -29,10 +41,10 @@ app.MapGet("/api/notification/send", async (ILogger<Program> logger, Cancellatio
             From = "i.a.dzyubin@yandex.ru", 
             To = "idzyubin@yahoo.com", 
             Subject = "Test Subject", 
-            Body = "Test body"
+            Body = "Test notification"
         };
-        var message = new Message<Null, string> { Value = JsonSerializer.Serialize(notification) };
-        await producer.ProduceAsync(notificationTopicName, message, cancellationToken);
+        var message = new Message<string, Notification> { Key = Guid.NewGuid().ToString(), Value = notification };
+        await producer.ProduceAsync(KafkaTopics.NotificationTopic, message, cancellationToken);
     }
     catch (ProduceException<Null, string> e)
     {

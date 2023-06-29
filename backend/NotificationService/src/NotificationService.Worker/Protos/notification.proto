@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+package Contracts.Proto.Notification;
+
+message Notification {
+  string from = 1;
+  string to = 2;
+  string subject = 3;
+  string body = 4;
+}
