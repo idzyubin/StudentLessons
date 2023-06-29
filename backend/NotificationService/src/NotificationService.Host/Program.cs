@@ -38,8 +38,8 @@ app.MapGet("/api/notification/send", async (
     {
         var notification = new Notification
         {
-            From = "i.a.dzyubin@yandex.ru", 
-            To = "idzyubin@yahoo.com", 
+            From = "producer@yandex.ru", 
+            To = "consumer@yandex.ru", 
             Subject = "Test Subject", 
             Body = "Test notification"
         };
