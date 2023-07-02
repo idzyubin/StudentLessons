@@ -1,5 +1,32 @@
-version: '3.8'
+version: '3.9'
+
 services:
+  user-service:
+    build: 
+      context: ../backend/UserService/
+      dockerfile: Dockerfile
+    ports:
+      - "10001:80"
+    links:
+      - user_database
+    depends_on:
+      - user_database
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - CONNECTION_STRING=Host=user_database;Username=postgres;Password=password;Database=user_db;
+
+  user_database:
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=user_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - user-db-volume:/var/lib/postgresql/data
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     hostname: zookeeper
@@ -59,3 +86,7 @@ services:
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
+
+volumes:
+  user-db-volume:
+    driver: local  
