@@ -6,6 +6,7 @@ backend/UserService/src/UserService.Domain/bin
 backend/UserService/src/UserService.Domain/obj
 backend/UserService/src/UserService.Infrastructure/bin
 backend/UserService/src/UserService.Infrastructure/obj
+backend/NotificationService/.idea
 backend/NotificationService/src/NotificationService.Host/bin
 backend/NotificationService/src/NotificationService.Host/obj
 backend/NotificationService/src/NotificationService.Domain/bin
@@ -14,3 +15,10 @@ backend/NotificationService/src/NotificationService.Infrastructure/bin
 backend/NotificationService/src/NotificationService.Infrastructure/obj
 backend/NotificationService/src/NotificationService.Worker/bin
 backend/NotificationService/src/NotificationService.Worker/obj
+backend/ProductService/.idea
+backend/ProductService/src/ProductService.Host/bin
+backend/ProductService/src/ProductService.Host/obj
+backend/ProductService/src/ProductService.Domain/bin
+backend/ProductService/src/ProductService.Domain/obj
+backend/ProductService/src/ProductService.Infrastructure/bin
+backend/ProductService/src/ProductService.Infrastructure/obj

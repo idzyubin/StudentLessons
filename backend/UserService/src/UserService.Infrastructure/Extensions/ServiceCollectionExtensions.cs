@@ -14,11 +14,12 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/></param>
     /// <param name="configuration"><see cref="IConfiguration"/></param>
+    /// <param name="connectionString">Строка подключения к Базе Данных</param>
     /// <returns><see cref="IServiceCollection"/></returns>
-    public static IServiceCollection AddBusinessLogic(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddBusinessLogic(this IServiceCollection services, IConfiguration configuration, string connectionString)
     {
         services.AddManagers();
-        services.AddDatabase(configuration);
+        services.AddDatabase(connectionString);
         return services;
     }
 
@@ -37,14 +38,11 @@ public static class ServiceCollectionExtensions
     ///     Добавление Базы Данных.
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/></param>
-    /// <param name="configuration"><see cref="IConfiguration"/></param>
+    /// <param name="connectionString">Строка подключения к Базе Данных</param>
     /// <returns><see cref="IServiceCollection"/></returns>
-    private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)
     {
-        services.AddDbContext<UserContext>(builder => 
-            builder.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection")));
-        
+        services.AddDbContext<UserContext>(builder => builder.UseNpgsql(connectionString));
         return services;
     }
 }
