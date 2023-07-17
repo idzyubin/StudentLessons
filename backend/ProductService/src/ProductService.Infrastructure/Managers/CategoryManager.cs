@@ -1,13 +1,16 @@
-using System.Linq.Expressions;
+using AutoMapper;
 using ProductService.Domain.Entities;
-using ProductService.Domain.Interfaces;
+using ProductService.Infrastructure.Contexts;
 
 namespace ProductService.Infrastructure.Managers;
 
-public class CategoryManager : ICategoryManager
+/// <summary>
+///     Менеджер категорий
+/// </summary>
+public sealed class CategoryManager : BaseManager<Category>
 {
-    public ValueTask<IReadOnlyCollection<Category>> GetAsync(Expression<Func<Category, bool>> predicate, CancellationToken cancellationToken)
+    /// <inheritdoc cref="BaseManager{TEntity}"/>
+    public CategoryManager(ProductContext context, IMapper mapper) : base(context, mapper)
     {
-        throw new NotImplementedException();
     }
 }

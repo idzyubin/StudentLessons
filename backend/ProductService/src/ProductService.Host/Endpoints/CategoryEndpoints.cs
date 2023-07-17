@@ -1,37 +1,37 @@
-using ProductService.Host.Features.Product.Delete;
-using ProductService.Host.Features.Product.Get;
-using ProductService.Host.Features.Product.GetAll;
-using ProductService.Host.Features.Product.Restore;
-using ProductService.Host.Features.Product.Update;
-using ProductService.Host.Features.Product.Create;
+﻿using ProductService.Host.Features.Category.Create;
+using ProductService.Host.Features.Category.Delete;
+using ProductService.Host.Features.Category.Get;
+using ProductService.Host.Features.Category.GetAll;
+using ProductService.Host.Features.Category.Restore;
+using ProductService.Host.Features.Category.Update;
 
 namespace ProductService.Host.Endpoints;
 
 /// <summary>
-///     Эндпоинты для взаимодействия с товарами
+///     Эндпоинты для взаимодействия с категориями товаров
 /// </summary>
-public static class ProductEndpoints
+public static class CategoryEndpoints
 {
-    public static WebApplication AddProductEndpoints(this WebApplication application)
+    public static WebApplication AddCategoryEndpoints(this WebApplication application)
     {
-        var group = application.MapGroup("/api/product").WithOpenApi();
+        var group = application.MapGroup("/api/category").WithOpenApi();
 
-        group.MapGet("/", GetAllProductsRequest.HandleAsync)
+        group.MapGet("/", GetAllCategoriesHandler.HandleAsync)
             .WithSummary("Данный метод предназначен для получения всех товаров");
 
-        group.MapGet("/{id:long}", GetProductHandler.HandleAsync)
+        group.MapGet("/{id:long}", GetCategoryHandler.HandleAsync)
             .WithSummary("Данный метод предназначен для получения товара по указанному идентификатору");
         
-        group.MapPost("/", CreateProductHandler.HandleAsync)
+        group.MapPost("/", CreateCategoryHandler.HandleAsync)
             .WithSummary("Данный метод предназначен для добавления нового товара");
         
-        group.MapPut("/{id:long}", UpdateProductHandler.HandleAsync)
+        group.MapPut("/{id:long}", UpdateCategoryHandler.HandleAsync)
             .WithSummary("Данный метод предназначен для обновления данных товара по указанному идентификатору");
         
-        group.MapPut("/{id:long}", RestoreProductHandler.HandleAsync)
+        group.MapPut("/{id:long}", RestoreCategoryHandler.HandleAsync)
             .WithSummary("Данный метод предназначен для обновления данных товара по указанному идентификатору");
 
-        group.MapDelete("/{id:long}", DeleteProductHandler.HandleAsync)
+        group.MapDelete("/{id:long}", DeleteCategoryHandler.HandleAsync)
             .WithSummary("Данный метод предназначен для удаления товара по указанному идентификатору");
 
         return application;

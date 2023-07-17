@@ -1,7 +1,6 @@
 using FluentValidation;
-using ProductService.Host.Dto;
 
-namespace ProductService.Host.Validators;
+namespace ProductService.Host.Features.Product.Create;
 
 public class CreateProductValidator : AbstractValidator<CreateProductRequest>
 {

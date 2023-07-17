@@ -1,18 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ProductService.Domain.Entities;
 
 /// <summary>
 ///     Сущность товара
 /// </summary>
-public class Product
+public sealed class Product : Entity
 {
-    /// <summary>
-    ///     Идентификатор товара
-    /// </summary>
-    [Key]
-    public long Id { get; set; }
-
     /// <summary>
     ///     Наименование товара
     /// </summary>

@@ -1,15 +1,16 @@
+using AutoMapper;
 using ProductService.Domain.Entities;
-using ProductService.Domain.Interfaces;
+using ProductService.Infrastructure.Contexts;
 
 namespace ProductService.Infrastructure.Managers;
 
 /// <summary>
-///     Реализация <see cref="IProductManager"/>
+///     Менеджер категорий
 /// </summary>
-public sealed class ProductManager : IProductManager
+public sealed class ProductManager : BaseManager<Product>
 {
-    public ValueTask<Product> CreateAsync(Product product, CancellationToken cancellationToken)
+    /// <inheritdoc cref="BaseManager{TEntity}"/>
+    public ProductManager(ProductContext context, IMapper mapper) : base(context, mapper)
     {
-        throw new NotImplementedException();
     }
 }
